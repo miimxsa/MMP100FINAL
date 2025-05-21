@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Character Selection</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #ffe6f0; 
+      color: #333;
+      text-align: center;
+      padding: 20px;
+      min-height: 100vh;
+      padding-bottom: 60px; 
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 3em;
+      margin-bottom: 30px;
+    }
+
+    .character-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .character {
+      position: relative;
+      cursor: pointer;
+      background: white;
+      border: 3px solid #fff;
+      border-radius: 20px;
+      padding: 10px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .character:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #eb8f9f;
+    }
+
+    .character img {
+      width: 150px;
+      height: 150px;
+      border-radius: 12px;
+      border: 2px solid #fff;
+    }
+
+    .dropdown {
+      display: none;
+      opacity: 0;
+      transition: all 0.3s ease;
+      position: absolute;
+      top: 180px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      border-radius: 12px;
+      padding: 15px;
+      width: 260px;
+      text-align: left;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .dropdown.open {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .dropdown div {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .dropdown img {
+      width: 36px;
+      height: 36px;
+      margin-right: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .dropdown img:hover {
+      transform: scale(1.2) translateY(-2px);
+      filter: drop-shadow(0 0 6px #ffc0cb);
+      animation: bounce 0.3s ease;
+    }
+
+    @keyframes bounce {
+      0%   { transform: scale(1.1) translateY(0); }
+      50%  { transform: scale(1.25) translateY(-3px); }
+      100% { transform: scale(1.2) translateY(-2px); }
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #ffe6f0;
+      color: #555;
+      font-size: 14px;
+      font-style: italic;
+      padding: 10px 0;
+      text-align: center;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    footer a {
+      color: #d05ca0;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .character-title {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="audio/background.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <button onclick="toggleMusic()">🔊 Toggle Music</button>
+
+  <h1>✨ Choose Your Character :3 ✨</h1>
+
+  <div class="character-container">
+    <!-- Character 1 -->
+    <div class="character" onclick="toggleDropdown(this)">
+      <img src="images/jeilyn.png" alt="Meri">
+      <div class="character-title">Meri</div>
+      <div class="dropdown">
+        <div><img src="images/taco.png" alt="Food"> Favorite Food: Tacos</div>
+        <div><img src="images/pink.png" alt="Color"> Favorite Color: Pink</div>
+        <div><img src="images/weights.png" alt="Hobby"> Hobby: Strength Training</div>
+        <div><img src="images/cd.png" alt="Song"> Song: "Crystal Castles"</div>
+        <div><img src="images/car.png" alt="Item"> Symbolic Item: Volkswagen Beetle</div>
+      </div>
+    </div>
+
+    <!-- Character 2 -->
+    <div class="character" onclick="toggleDropdown(this)">
+      <img src="images/ellie.png" alt="Elyse">
+      <div class="character-title">Elyse</div>
+      <div class="dropdown">
+        <div><img src="images/food3.png" alt="Food"> Favorite Food: Coke Zero</div>
+        <div><img src="images/green.png" alt="Color"> Favorite Color: Green</div>
+        <div><img src="images/hobby3.png" alt="Hobby"> Hobby: Reading</div>
+        <div><img src="images/song3.png" alt="Song"> Song: "Blur"</div>
+        <div><img src="images/item3.png" alt="Item"> Symbolic Item: Pen</div>
+      </div>
+    </div>
+
+    <!-- Character 3 -->
+    <div class="character" onclick="toggleDropdown(this)">
+      <img src="images/jalyn.png" alt="Jaon">
+      <div class="character-title">Jaon</div>
+      <div class="dropdown">
+        <div><img src="images/sushi.png" alt="Food"> Favorite Food: Salmon</div>
+        <div><img src="images/orange.png" alt="Color"> Favorite Color: Orange</div>
+        <div><img src="images/lifting.png" alt="Hobby"> Hobby: Lifting Weights</div>
+        <div><img src="images/music.png" alt="Song"> Song: "Cocteau Twins"</div>
+        <div><img src="images/bracelet.png" alt="Item"> Symbolic Item: Friendship Bracelet</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>
+      Original illustrations by AAC(me), and song by 
+      <a href="https://pixabay.com/music/ambient-relaxing-ambient-music-337579/" target="_blank" rel="noopener noreferrer">
+        Clavier-Music | relaxing ambient music
+      </a>
+    </p>
+  </footer>
+
+  <script>
+    function toggleDropdown(characterElement) {
+      const allDropdowns = document.querySelectorAll('.dropdown');
+      allDropdowns.forEach(drop => {
+        if (drop !== characterElement.querySelector('.dropdown')) {
+          drop.classList.remove('open');
+        }
+      });
+      const dropdown = characterElement.querySelector('.dropdown');
+      dropdown.classList.toggle('open');
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById('bg-music');
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+  </script>
+
+</body>
+</html>
